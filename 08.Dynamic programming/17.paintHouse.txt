@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int[][] arr = new int[n][3];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<3;j++){
+                arr[i][j] = scn.nextInt();
+            }
+        }
+        
+        System.out.print(minPaintCost(arr));
+    }
+    public static int minPaintCost(int[][] arr){
+        int n = arr.length;
+        
+        int or=0;
+        int og=0;
+        int ob=0;
+        for(int i=0;i<n;i++){
+            int nr = Math.min(og,ob) + arr[i][0];
+            int ng = Math.min(or,ob) + arr[i][1];
+            int nb = Math.min(og,or) + arr[i][2];
+            
+            or=nr;
+            ob=nb;
+            og=ng;
+        }
+        return Math.min(Math.min(or,og),ob);
+    }
+}
